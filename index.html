@@ -810,28 +810,6 @@ user-drag: none;
 </div>
 
     
-    <p>Topologi jaringan di bawah akan digunakan sebagai dasar ilustrasi untuk konfigurasi mode wireless AP dan Station di MikroTik. Dalam topologi ini, satu MikroTik Router bertindak sebagai Access Point (AP) dan satu atau lebih MikroTik Router lainnya bertindak sebagai Station yang terhubung ke AP tersebut.</p>
-    
-    <div class="tech-alert">
-        <p>Router MikroTik pertama akan berfungsi sebagai AP yang memancarkan sinyal WiFi, sementara router-router MikroTik lainnya akan berfungsi sebagai Station yang menerima dan terhubung ke sinyal WiFi dari AP. Ini adalah konfigurasi umum untuk komunikasi nirkabel antar-router dan penyediaan akses nirkabel untuk perangkat client.</p>
-    </div>
-    
-    <p>Berikut adalah komponen-komponen utama dalam topologi ini:</p>
-    
-    <div class="code-terminal">
-        <div class="code-line"><span class="keyword">1. MikroTik Router (AP)</span></div>
-        <div class="code-line comment"># Router MikroTik yang dikonfigurasi sebagai Access Point (mode ap-bridge)</div>
-        <div class="code-line"><span class="keyword">2. MikroTik Router (Station)</span></div>
-        <div class="code-line comment"># Router MikroTik yang dikonfigurasi sebagai Station/Client (mode station)</div>
-        <div class="code-line"><span class="keyword">3. SSID dan Security Profile</span></div>
-        <div class="code-line comment"># SSID dan konfigurasi keamanan untuk koneksi wireless</div>
-    </div>
-    
-    <div class="security-alert">
-        <p>Pastikan menggunakan enkripsi yang kuat (WPA2 atau WPA3) untuk melindungi jaringan wireless Anda dari akses tidak sah. Hindari penggunaan WEP atau WPA1 yang sudah diketahui memiliki kelemahan keamanan.</p>
-    </div>
-</div>
-
 <div class="container">
     <!-- Section: Mode Access Point (AP) -->
     <div class="section fade-in">
@@ -1328,4 +1306,5 @@ user-drag: none;
 </body>
 
 </html>
+
 
