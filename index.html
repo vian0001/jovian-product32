@@ -767,7 +767,6 @@ user-drag: none;
 
 
 
-
 <!-- Portfolio Button -->
 <a href="https://jovian-portofolio02.vercel.app/" target="_blank" class="portfolio-button">
     <span class="portfolio-icon">🚀</span>
@@ -815,65 +814,102 @@ user-drag: none;
     <div class="section fade-in">
         <h2 class="section-title">1. MODE ACCESS POINT (AP)</h2>
 
-                                                        <div class="image-container">
+        <div class="image-container">
           <img src="topologi.png" alt="SERVICE IP pada MikroTik RouterOS">
           <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
 
-                                                        <div class="image-container">
+        <div class="image-container">
           <img src="no (2).png" alt="SERVICE IP pada MikroTik RouterOS">
           <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
-                                                        <div class="image-container">
+        
+        <div class="image-container">
           <img src="no (1).png" alt="SERVICE IP pada MikroTik RouterOS">
           <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
-
 
         <h3 class="subsection-title">Pengertian Mode Access Point</h3>
         <p>Dari sumber MikroTik Documentation (2024), mode Access Point (AP) pada MikroTik adalah mode operasi wireless dimana router berfungsi sebagai titik akses yang memancarkan sinyal WiFi yang dapat diakses oleh perangkat client. Mode ini memungkinkan MikroTik menjadi pusat koneksi wireless untuk berbagai perangkat seperti laptop, smartphone, atau router lain yang dikonfigurasi sebagai station.</p>
         
         <p>Dari sumber MikroTik Wiki (2023), RouterOS mendukung dua mode AP utama: mode <code>ap-bridge</code> yang memungkinkan hingga 2007 klien terhubung secara bersamaan, dan mode <code>bridge</code> yang berfungsi sebagai bridge layer 2 sederhana. Untuk sebagian besar kasus penggunaan umum, mode <code>ap-bridge</code> adalah pilihan yang direkomendasikan.</p>
         
-        <h3 class="subsection-title">Konfigurasi Mode AP menggunakan CLI</h3>
+        <h3 class="subsection-title">Konfigurasi Mode AP menggunakan WinBox</h3>
         <p>Dari sumber NetworkLessons (2024), konfigurasi mode AP pada MikroTik memerlukan beberapa langkah utama, yaitu mengatur interface wireless ke mode ap-bridge, menentukan SSID, band, frekuensi, dan security profile.</p>
         
-        <p>Dari sumber MikroTik Wiki (2023), langkah-langkah konfigurasi dasar mode AP meliputi pengaturan mode, SSID, frequency, band, dan security profile. Semua parameter ini dapat dikonfigurasi melalui CLI MikroTik dengan perintah-perintah yang tepat.</p>
+        <p>Dari sumber MikroTik Wiki (2023), langkah-langkah konfigurasi dasar mode AP meliputi pengaturan mode, SSID, frequency, band, dan security profile. Semua parameter ini dapat dengan mudah dikonfigurasi melalui WinBox.</p>
         
-        <p>Berikut adalah langkah-langkah konfigurasi mode AP melalui CLI:</p>
+        <p>Berikut adalah langkah-langkah konfigurasi mode AP melalui WinBox:</p>
         
         <div class="code-terminal">
-            <div class="code-line comment"># 1. Melihat interface wireless yang tersedia</div>
-            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
-            <div class="code-line comment"># Output contoh:</div>
-            <div class="code-line">Flags: X - disabled, R - running </div>
-            <div class="code-line"> 0  X  name="wlan1" mtu=1500 mac-address=48:A9:8A:XX:XX:XX arp=enabled</div>
-            <div class="code-line comment"># 2. Mengatur mode AP, SSID, dan band</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 mode=<span class="string">ap-bridge</span> ssid=<span class="string">"MikroTik-AP"</span> band=<span class="string">2ghz-b/g/n</span></div>
-            <div class="code-line comment"># 3. Mengatur frequency (channel)</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 frequency=<span class="string">2437</span></div>
-            <div class="code-line comment"># 4. Membuat security profile</div>
-            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
-            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"profile1"</span> mode=<span class="string">dynamic-keys</span> authentication-types=<span class="string">wpa2-psk</span> wpa2-pre-shared-key=<span class="string">"password123"</span></div>
-            <div class="code-line comment"># 5. Menerapkan security profile ke interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 security-profile=<span class="string">"profile1"</span></div>
-            <div class="code-line comment"># 6. Mengaktifkan interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless enable</span> wlan1</div>
+            <div class="code-line comment"># 1. Membuat Security Profile</div>
+            <div class="code-line">1. Buka WinBox dan hubungkan ke router MikroTik</div>
+            <div class="code-line">2. Klik pada menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">3. Pada jendela Wireless Tables, klik tab <span class="keyword">Security Profiles</span></div>
+            <div class="code-line">4. Klik tombol <span class="string">PLUS (+)</span> untuk membuat profil baru</div>
+            <div class="code-line">5. Pada jendela New Security Profile:</div>
+            <div class="code-line">   - Masukkan nama profil (misal: <span class="string">"profile1"</span>) di kolom <span class="keyword">Name</span></div>
+            <div class="code-line">   - Pilih <span class="string">"dynamic keys"</span> pada dropdown <span class="keyword">Mode</span></div>
+            <div class="code-line">   - Centang <span class="string">WPA2 PSK</span> pada panel Authentication Types</div>
+            <div class="code-line">   - Masukkan password yang kuat di kolom <span class="keyword">WPA2 Pre-Shared Key</span></div>
+            <div class="code-line">6. Klik <span class="string">Apply</span> dan <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 2. Mengkonfigurasi Interface Wireless</div>
+            <div class="code-line">1. Di WinBox, klik pada menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Pada jendela Wireless Tables, klik tab <span class="keyword">WiFi Interfaces</span></div>
+            <div class="code-line">3. Klik dua kali pada interface wireless (biasanya <span class="string">"wlan1"</span>)</div>
+            <div class="code-line">4. Pada tab <span class="keyword">General</span>:</div>
+            <div class="code-line">   - <span class="keyword">Name</span>: Tentukan nama identifikasi (misal: <span class="string">"AP-WiFi"</span>)</div>
+            <div class="code-line">   - <span class="keyword">Mode</span>: Pilih <span class="string">"ap bridge"</span></div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            
+            <div class="code-line">5. Pada tab <span class="keyword">Configuration</span>:</div>
+            <div class="code-line">   - <span class="keyword">SSID</span>: Tentukan nama jaringan WiFi (misal: <span class="string">"MikroTik-AP"</span>)</div>
+            <div class="code-line">   - <span class="keyword">Country</span>: Pilih negara untuk mematuhi regulasi lokal</div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            
+            <div class="code-line">6. Pada tab <span class="keyword">Channel</span>:</div>
+            <div class="code-line">   - <span class="keyword">Band</span>: Pilih band frekuensi (misal: <span class="string">"2GHz-B/G/N"</span>)</div>
+            <div class="code-line">   - <span class="keyword">Channel Width</span>: Pilih lebar kanal (misal: <span class="string">"20MHz"</span> atau <span class="string">"20/40MHz"</span>)</div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            
+            <div class="code-line">7. Pada tab <span class="keyword">Security</span>:</div>
+            <div class="code-line">   - <span class="keyword">Authentication Types</span>: Pilih tipe keamanan (misal: <span class="string">WPA2 PSK</span>)</div>
+            <div class="code-line">   - <span class="keyword">Security Profile</span>: Pilih profil keamanan yang sudah dibuat sebelumnya</div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 3. Membuat Bridge (jika belum ada)</div>
+            <div class="code-line">1. Pada menu kiri, klik <span class="keyword">Bridge</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">+</span> untuk membuat bridge baru</div>
+            <div class="code-line">3. Beri nama bridge (misal: <span class="string">"bridge1"</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 4. Menambahkan Interface ke Bridge</div>
+            <div class="code-line">1. Pada menu <span class="keyword">Bridge</span>, klik tab <span class="keyword">Ports</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">+</span> untuk menambahkan port</div>
+            <div class="code-line">3. Pilih interface wireless (misal: <span class="string">"wlan1"</span>) dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">4. Pilih bridge yang sudah dibuat pada dropdown <span class="keyword">Bridge</span></div>
+            <div class="code-line">5. Klik <span class="string">OK</span></div>
+            <div class="code-line">6. Ulangi langkah 2-5 untuk setiap port ethernet yang ingin disertakan dalam bridge</div>
         </div>
         
         <h3 class="subsection-title">Verifikasi Konfigurasi AP</h3>
-        <p>Setelah mengkonfigurasi mode AP, penting untuk memverifikasi bahwa konfigurasi tersebut berjalan dengan baik. Berikut adalah beberapa perintah untuk memeriksa status AP:</p>
+        <p>Setelah mengkonfigurasi mode AP, penting untuk memverifikasi bahwa konfigurasi tersebut berjalan dengan baik. Berikut adalah beberapa langkah verifikasi di WinBox:</p>
         
         <div class="code-terminal">
             <div class="code-line comment"># Memeriksa status interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Periksa interface wireless, pastikan status menunjukkan "R" (running)</div>
+            
             <div class="code-line comment"># Memeriksa client yang terhubung ke AP</div>
-            <div class="code-line"><span class="keyword">/interface wireless registration-table print</span></div>
-            <div class="code-line comment"># Output contoh jika ada client terhubung:</div>
-            <div class="code-line"># MAC-ADDRESS       INTERFACE    SIGNAL... UPTIME</div>
-            <div class="code-line">0 48:8F:5A:XX:XX:XX wlan1        -65dBm... 3h32m10s</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Klik tab <span class="keyword">Registration Table</span></div>
+            <div class="code-line">3. Di sini Anda akan melihat semua client wireless yang terhubung</div>
+            
             <div class="code-line comment"># Memeriksa status access list</div>
-            <div class="code-line"><span class="keyword">/interface wireless access-list print</span></div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Klik tab <span class="keyword">Access List</span></div>
+            <div class="code-line">3. Di sini Anda dapat melihat dan mengelola izin akses client</div>
         </div>
         
         <h3 class="subsection-title">Konfigurasi Tambahan untuk AP</h3>
@@ -882,21 +918,36 @@ user-drag: none;
         
         <div class="code-terminal">
             <div class="code-line comment"># Membatasi jumlah klien yang dapat terhubung</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 max-station-count=<span class="string">30</span></div>
-            <div class="code-line comment"># Mengatur lebar channel (untuk throughput lebih tinggi)</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 channel-width=<span class="string">20/40mhz-Ce</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Set <span class="keyword">Max Station Count</span> ke nilai yang diinginkan (misal: <span class="string">30</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># Mengatur Channel Width untuk throughput lebih tinggi</div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Channel</span></div>
+            <div class="code-line">3. Set <span class="keyword">Channel Width</span> ke nilai yang diinginkan (misal: <span class="string">20/40MHz</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mengatur country untuk mengikuti regulasi frekuensi lokal</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 country=<span class="string">indonesia</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Wireless</span></div>
+            <div class="code-line">3. Pilih <span class="keyword">Country</span> yang sesuai (misal: <span class="string">Indonesia</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mengatur distance untuk optimasi performa</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 distance=<span class="string">indoors</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Set <span class="keyword">Distance</span> ke nilai yang sesuai (misal: <span class="string">indoors</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
         </div>
         
         <div class="tech-alert">
-            <p>Pengaturan <code>distance</code> mempengaruhi algoritma ACK timing. Untuk area indoor, gunakan nilai "indoors". Untuk koneksi jarak jauh, gunakan nilai numerik dalam kilometer (misalnya "10" untuk 10km) atau "dynamic" agar MikroTik secara otomatis menyesuaikan timing berdasarkan client terjauh.</p>
+            <p>Pengaturan <code>Distance</code> mempengaruhi algoritma ACK timing. Untuk area indoor, gunakan nilai "indoors". Untuk koneksi jarak jauh, gunakan nilai numerik dalam kilometer (misalnya "10" untuk 10km) atau "dynamic" agar MikroTik secara otomatis menyesuaikan timing berdasarkan client terjauh.</p>
         </div>
         
         <div class="conclusion-box">
-            <strong>Kesimpulan Mode Access Point:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa mode Access Point (AP) pada MikroTik adalah konfigurasi yang memungkinkan router memancarkan sinyal WiFi yang dapat diakses oleh perangkat lain. Konfigurasi dasar mode AP melibatkan pengaturan mode ap-bridge, SSID, frequency, band, dan security profile, yang semuanya dapat dikonfigurasi dengan mudah melalui CLI. Dengan konfigurasi yang tepat, AP MikroTik dapat melayani banyak klien secara bersamaan dan menyediakan konektivitas wireless yang andal.
+            <strong>Kesimpulan Mode Access Point:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa mode Access Point (AP) pada MikroTik adalah konfigurasi yang memungkinkan router memancarkan sinyal WiFi yang dapat diakses oleh perangkat lain. Konfigurasi dasar mode AP melalui WinBox melibatkan pembuatan security profile, pengaturan interface wireless ke mode AP bridge, konfigurasi SSID, frequency, band, dan menambahkan interface ke bridge. Dengan konfigurasi yang tepat, AP MikroTik dapat melayani banyak klien secara bersamaan dan menyediakan konektivitas wireless yang andal.
         </div>
     </div>
 
@@ -904,12 +955,12 @@ user-drag: none;
     <div class="section fade-in">
         <h2 class="section-title">2. MODE STATION</h2>
 
-                                                                <div class="image-container">
+        <div class="image-container">
           <img src="topologi2.png" alt="SERVICE IP pada MikroTik RouterOS">
           <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
 
-                                                        <div class="image-container">
+        <div class="image-container">
           <img src="no (3).png" alt="SERVICE IP pada MikroTik RouterOS">
           <div class="image-caption">Tampilan topologi di gns3</div>
         </div>
@@ -931,74 +982,118 @@ user-drag: none;
         
         <p>Dari sumber Wireless Station Modes Documentation (2024), pemilihan tipe mode station yang tepat tergantung pada kebutuhan bridging L2. Jika bridging L2 tidak diperlukan (seperti pada jaringan yang di-routing), mode <code>station</code> standar adalah pilihan terbaik karena paling efisien.</p>
 
-        <h3 class="subsection-title">Konfigurasi Mode Station menggunakan CLI</h3>
-        <p>Berikut adalah langkah-langkah konfigurasi mode Station melalui CLI:</p>
+        <h3 class="subsection-title">Konfigurasi Mode Station menggunakan WinBox</h3>
+        <p>Berikut adalah langkah-langkah konfigurasi mode Station melalui WinBox:</p>
         
         <div class="code-terminal">
-            <div class="code-line comment"># 1. Melihat interface wireless yang tersedia</div>
-            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
-            <div class="code-line comment"># 2. Mengatur mode Station, SSID, dan band</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 mode=<span class="string">station</span> ssid=<span class="string">"MikroTik-AP"</span> band=<span class="string">2ghz-b/g/n</span></div>
-            <div class="code-line comment"># 3. Membuat security profile (jika belum ada)</div>
-            <div class="code-line"><span class="keyword">/interface wireless security-profiles</span></div>
-            <div class="code-line"><span class="keyword">add</span> name=<span class="string">"station_profile"</span> mode=<span class="string">dynamic-keys</span> authentication-types=<span class="string">wpa2-psk</span> wpa2-pre-shared-key=<span class="string">"password123"</span></div>
-            <div class="code-line comment"># 4. Menerapkan security profile ke interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 security-profile=<span class="string">"station_profile"</span></div>
-            <div class="code-line comment"># 5. Mengaktifkan interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless enable</span> wlan1</div>
+            <div class="code-line comment"># 1. Membuat Security Profile</div>
+            <div class="code-line">1. Buka WinBox dan hubungkan ke router MikroTik</div>
+            <div class="code-line">2. Klik pada menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">3. Pada jendela Wireless Tables, klik tab <span class="keyword">Security Profiles</span></div>
+            <div class="code-line">4. Klik tombol <span class="string">PLUS (+)</span> untuk membuat profil baru</div>
+            <div class="code-line">5. Pada jendela New Security Profile:</div>
+            <div class="code-line">   - Masukkan nama profil (misal: <span class="string">"station_profile"</span>) di kolom <span class="keyword">Name</span></div>
+            <div class="code-line">   - Pilih <span class="string">"dynamic keys"</span> pada dropdown <span class="keyword">Mode</span></div>
+            <div class="code-line">   - Centang tipe autentikasi yang sesuai dengan AP tujuan (misal: <span class="string">WPA2 PSK</span>)</div>
+            <div class="code-line">   - Masukkan password AP tujuan di kolom <span class="keyword">WPA2 Pre-Shared Key</span></div>
+            <div class="code-line">6. Klik <span class="string">Apply</span> dan <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 2. Mengkonfigurasi Interface Wireless sebagai Station</div>
+            <div class="code-line">1. Pada jendela Wireless, klik tab <span class="keyword">WiFi Interfaces</span></div>
+            <div class="code-line">2. Klik dua kali pada interface wireless (biasanya <span class="string">"wlan1"</span>)</div>
+            <div class="code-line">3. Pada tab <span class="keyword">Wireless</span>:</div>
+            <div class="code-line">   - <span class="keyword">Mode</span>: Pilih <span class="string">"station"</span> (atau mode station lain sesuai kebutuhan)</div>
+            <div class="code-line">   - <span class="keyword">Band</span>: Pilih band yang sesuai dengan AP tujuan</div>
+            <div class="code-line">   - Klik tombol <span class="string">Advanced Mode</span> pada panel kanan</div>
+            <div class="code-line">   - <span class="keyword">Security Profile</span>: Pilih profil keamanan yang sudah dibuat sebelumnya</div>
+            
+            <div class="code-line comment"># 3. Melakukan Scan dan Terhubung ke AP</div>
+            <div class="code-line">1. Pada jendela interface (dengan interface wireless terbuka), klik tombol <span class="keyword">Scan</span></div>
+            <div class="code-line">2. Pada jendela Scanner, pilih interface wireless dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">3. Klik tombol <span class="string">Start</span></div>
+            <div class="code-line">4. Setelah scan selesai, Anda akan melihat daftar jaringan yang tersedia</div>
+            <div class="code-line">5. Klik dua kali pada jaringan yang ingin dihubungi</div>
+            <div class="code-line">6. Verifikasi detail koneksi dan klik <span class="string">Connect</span></div>
+            <div class="code-line">7. Klik <span class="string">OK</span> untuk menutup jendela Interface</div>
+            
+            <div class="code-line comment"># 4. Mengkonfigurasi DHCP Client (jika diperlukan)</div>
+            <div class="code-line">1. Dari WinBox, buka menu <span class="keyword">IP</span> → <span class="keyword">DHCP Client</span></div>
+            <div class="code-line">2. Pada jendela DHCP Client, klik tombol <span class="string">PLUS (+)</span></div>
+            <div class="code-line">3. Pada jendela New DHCP Client:</div>
+            <div class="code-line">   - Dari tab DHCP, pilih interface wireless (misal: <span class="string">"wlan1"</span>) dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">   - Pastikan kotak <span class="keyword">Use Peer DNS</span> dan <span class="keyword">Use Peer NTP</span> dicentang jika ingin menggunakan DNS dan NTP dari ISP</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 5. Mengkonfigurasi IP Statis (alternatif)</div>
+            <div class="code-line">1. Buka menu <span class="keyword">IP</span> → <span class="keyword">Addresses</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">PLUS (+)</span></div>
+            <div class="code-line">3. Masukkan alamat IP (misal: <span class="string">"192.168.0.2/24"</span>) di kolom <span class="keyword">Address</span></div>
+            <div class="code-line">4. Pilih interface wireless dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">5. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 6. Mengkonfigurasi Default Route (jika diperlukan)</div>
+            <div class="code-line">1. Buka menu <span class="keyword">IP</span> → <span class="keyword">Routes</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">PLUS (+)</span></div>
+            <div class="code-line">3. Biarkan kolom <span class="keyword">Dst. Address</span> kosong untuk default route</div>
+            <div class="code-line">4. Masukkan IP gateway di kolom <span class="keyword">Gateway</span></div>
+            <div class="code-line">5. Klik <span class="string">OK</span></div>
         </div>
         
         <p>Untuk mode station dengan bridging (misalnya station-bridge atau station-pseudobridge):</p>
         
         <div class="code-terminal">
-            <div class="code-line comment"># Menggunakan mode station-pseudobridge untuk bridging terbatas</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 mode=<span class="string">station-pseudobridge</span> ssid=<span class="string">"MikroTik-AP"</span></div>
-            <div class="code-line comment"># Atau menggunakan mode station-bridge untuk transparent bridging (hanya dengan AP MikroTik)</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 mode=<span class="string">station-bridge</span> ssid=<span class="string">"MikroTik-AP"</span></div>
-            <div class="code-line comment"># Jika ingin menambahkan interface wireless ke bridge</div>
-            <div class="code-line"><span class="keyword">/interface bridge add</span> name=<span class="string">bridge1</span></div>
-            <div class="code-line"><span class="keyword">/interface bridge port add</span> bridge=<span class="string">bridge1</span> interface=<span class="string">wlan1</span></div>
-            <div class="code-line"><span class="keyword">/interface bridge port add</span> bridge=<span class="string">bridge1</span> interface=<span class="string">ether1</span></div>
+            <div class="code-line comment"># Mengkonfigurasi Mode Station dengan Bridging</div>
+            <div class="code-line">1. Ikuti langkah 1-3 di atas, tetapi pilih mode <span class="string">"station-pseudobridge"</span> atau <span class="string">"station-bridge"</span></div>
+            <div class="code-line">2. Membuat bridge baru (jika belum ada):</div>
+            <div class="code-line">   - Buka menu <span class="keyword">Bridge</span></div>
+            <div class="code-line">   - Klik tombol <span class="string">+</span> untuk membuat bridge baru</div>
+            <div class="code-line">   - Masukkan nama (misal: <span class="string">"bridge1"</span>)</div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            <div class="code-line">3. Menambahkan interface ke bridge:</div>
+            <div class="code-line">   - Klik tab <span class="keyword">Ports</span></div>
+            <div class="code-line">   - Klik tombol <span class="string">+</span></div>
+            <div class="code-line">   - Pilih interface wireless dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">   - Pilih bridge yang dibuat dari dropdown <span class="keyword">Bridge</span></div>
+            <div class="code-line">   - Klik <span class="string">OK</span></div>
+            <div class="code-line">   - Ulangi untuk interface ethernet yang diperlukan</div>
         </div>
         
         <h3 class="subsection-title">Verifikasi Konfigurasi Station</h3>
-        <p>Berikut adalah beberapa perintah untuk memeriksa status koneksi Station:</p>
+        <p>Berikut adalah beberapa langkah untuk memeriksa status koneksi Station menggunakan WinBox:</p>
         
         <div class="code-terminal">
             <div class="code-line comment"># Memeriksa status interface wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless print</span></div>
-            <div class="code-line comment"># Memeriksa status koneksi wireless</div>
-            <div class="code-line"><span class="keyword">/interface wireless monitor</span> wlan1</div>
-            <div class="code-line comment"># Output contoh jika terkoneksi:</div>
-            <div class="code-line">status: connected-to-ess</div>
-            <div class="code-line">band: 2ghz-b/g/n</div>
-            <div class="code-line">frequency: 2437MHz</div>
-            <div class="code-line">ssid: MikroTik-AP</div>
-            <div class="code-line">signal-strength: -67dBm</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Periksa interface wireless, pastikan status menunjukkan "R" (running)</div>
+            
+            <div class="code-line comment"># Memeriksa status koneksi</div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Status</span></div>
+            <div class="code-line">3. Periksa status dan kekuatan sinyal</div>
+            <div class="code-line">4. Pastikan status menunjukkan "connected-to-ess"</div>
+            
             <div class="code-line comment"># Melakukan scan untuk melihat AP yang tersedia</div>
-            <div class="code-line"><span class="keyword">/interface wireless scan</span> wlan1</div>
-        </div>
-        
-        <h3 class="subsection-title">Konfigurasi IP pada Station</h3>
-        <p>Setelah koneksi wireless berhasil, perlu dilakukan konfigurasi IP agar perangkat dapat berkomunikasi di jaringan:</p>
-        
-        <div class="code-terminal">
-            <div class="code-line comment"># Mengatur IP address statis</div>
-            <div class="code-line"><span class="keyword">/ip address add</span> address=<span class="string">192.168.0.2/24</span> interface=<span class="string">wlan1</span></div>
-            <div class="code-line comment"># Atau menggunakan DHCP client untuk mendapatkan IP otomatis</div>
-            <div class="code-line"><span class="keyword">/ip dhcp-client add</span> interface=<span class="string">wlan1</span> disabled=<span class="string">no</span></div>
-            <div class="code-line comment"># Mengatur default route (jika diperlukan)</div>
-            <div class="code-line"><span class="keyword">/ip route add</span> gateway=<span class="string">192.168.0.1</span></div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Pilih interface wireless</div>
+            <div class="code-line">3. Klik tombol <span class="keyword">Scan</span> pada toolbar</div>
+            <div class="code-line">4. Klik <span class="string">Start</span> untuk memulai scan</div>
+            
+            <div class="code-line comment"># Memeriksa IP assignment</div>
+            <div class="code-line">1. Buka menu <span class="keyword">IP</span> → <span class="keyword">DHCP Client</span></div>
+            <div class="code-line">2. Verifikasi bahwa interface wireless telah menerima alamat IP (Status: "bound")</div>
+            
             <div class="code-line comment"># Memeriksa konektivitas dengan ping</div>
-            <div class="code-line"><span class="keyword">/ping</span> 192.168.0.1</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Tools</span> → <span class="keyword">Ping</span></div>
+            <div class="code-line">2. Masukkan alamat IP tujuan (misal: <span class="string">"8.8.8.8"</span>)</div>
+            <div class="code-line">3. Klik <span class="string">Start</span></div>
         </div>
         
         <div class="security-alert">
-            <p>Ketika menggunakan mode station, pastikan SSID dan password yang dikonfigurasi sudah benar. Jika menggunakan enkripsi WPA2/WPA3, pastikan parameter security-profile sudah sesuai dengan konfigurasi AP yang dituju.</p>
+            <p>Ketika menggunakan mode station, pastikan SSID dan password yang dikonfigurasi dalam security profile sudah benar. Jika menggunakan enkripsi WPA2/WPA3, pastikan parameter security profile sudah sesuai dengan konfigurasi AP yang dituju.</p>
         </div>
         
         <div class="conclusion-box">
-            <strong>Kesimpulan Mode Station:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa mode Station pada MikroTik berfungsi sebagai client wireless yang mencari dan terhubung ke access point lain. MikroTik menyediakan beberapa tipe mode station dengan karakteristik berbeda yang dapat dipilih sesuai kebutuhan, terutama terkait kemampuan bridging L2. Konfigurasi mode station memerlukan pengaturan mode, SSID, band, dan security profile yang sesuai dengan AP tujuan, serta konfigurasi IP yang tepat untuk komunikasi jaringan.
+            <strong>Kesimpulan Mode Station:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa mode Station pada MikroTik berfungsi sebagai client wireless yang mencari dan terhubung ke access point lain. MikroTik menyediakan beberapa tipe mode station dengan karakteristik berbeda yang dapat dipilih sesuai kebutuhan, terutama terkait kemampuan bridging L2. Konfigurasi mode station melalui WinBox melibatkan pembuatan security profile, pengaturan interface ke mode station, scan dan koneksi ke AP tujuan, serta konfigurasi IP yang tepat untuk komunikasi jaringan.
         </div>
     </div>
 
@@ -1006,77 +1101,133 @@ user-drag: none;
     <div class="section fade-in">
         <h2 class="section-title">3. KONFIGURASI LANJUTAN DAN TROUBLESHOOTING</h2>
 
- 
-
         <h3 class="subsection-title">Menggunakan Mode Kombinasi AP dan Station</h3>
         <p>Dari sumber RouterOS Documentation (2024), MikroTik memungkinkan penggunaan satu perangkat untuk beroperasi sebagai AP dan Station secara bersamaan dengan membuat interface virtual. Fitur ini sangat berguna untuk mengimplementasikan wireless repeater atau memperluas jangkauan jaringan wireless.</p>
         
         <p>Dari sumber MikroTik Wiki (2023), konfigurasi wireless repeater dapat dilakukan dengan mengatur interface utama sebagai station dan membuat interface virtual sebagai AP. Kedua interface tersebut kemudian dihubungkan melalui bridge untuk meneruskan traffic.</p>
         
         <div class="code-terminal">
-            <div class="code-line comment"># 1. Mengkonfigurasi interface utama sebagai station</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 mode=<span class="string">station-pseudobridge</span> ssid=<span class="string">"Uplink-AP"</span> security-profile=<span class="string">"station_profile"</span></div>
-            <div class="code-line comment"># 2. Membuat interface virtual AP</div>
-            <div class="code-line"><span class="keyword">/interface wireless add</span> master-interface=<span class="string">wlan1</span> name=<span class="string">virtual-AP</span> ssid=<span class="string">"Extended-Network"</span> mode=<span class="string">ap-bridge</span> security-profile=<span class="string">"profile1"</span></div>
-            <div class="code-line comment"># 3. Membuat bridge</div>
-            <div class="code-line"><span class="keyword">/interface bridge add</span> name=<span class="string">bridge1</span></div>
-            <div class="code-line comment"># 4. Menambahkan interface ke bridge</div>
-            <div class="code-line"><span class="keyword">/interface bridge port add</span> bridge=<span class="string">bridge1</span> interface=<span class="string">wlan1</span></div>
-            <div class="code-line"><span class="keyword">/interface bridge port add</span> bridge=<span class="string">bridge1</span> interface=<span class="string">virtual-AP</span></div>
-            <div class="code-line comment"># 5. Mengaktifkan interface</div>
-            <div class="code-line"><span class="keyword">/interface wireless enable</span> wlan1</div>
-            <div class="code-line"><span class="keyword">/interface wireless enable</span> virtual-AP</div>
+            <div class="code-line comment"># 1. Mengkonfigurasi Interface Utama sebagai Station</div>
+            <div class="code-line">1. Ikuti langkah-langkah konfigurasi station seperti dijelaskan sebelumnya</div>
+            <div class="code-line">2. Pilih mode <span class="string">"station-pseudobridge"</span> untuk mendukung bridging</div>
+            <div class="code-line">3. Konfigurasi untuk terhubung ke AP uplink</div>
+            
+            <div class="code-line comment"># 2. Membuat Interface Virtual AP</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">+</span> untuk menambahkan interface virtual baru</div>
+            <div class="code-line">3. Pada jendela New Interface, atur:</div>
+            <div class="code-line">   - <span class="keyword">Mode</span>: <span class="string">"ap bridge"</span></div>
+            <div class="code-line">   - <span class="keyword">Master Interface</span>: Pilih interface utama (misal: <span class="string">"wlan1"</span>)</div>
+            <div class="code-line">   - <span class="keyword">Name</span>: Beri nama yang sesuai (misal: <span class="string">"virtual-AP"</span>)</div>
+            <div class="code-line">   - <span class="keyword">SSID</span>: Masukkan nama jaringan yang ingin dipancarkan (misal: <span class="string">"Extended-Network"</span>)</div>
+            <div class="code-line">   - <span class="keyword">Security Profile</span>: Pilih profil keamanan yang sesuai</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 3. Membuat Bridge untuk Menghubungkan Interface</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Bridge</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">+</span> untuk membuat bridge baru</div>
+            <div class="code-line">3. Masukkan nama (misal: <span class="string">"bridge1"</span>)</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
+            <div class="code-line comment"># 4. Menambahkan Interface ke Bridge</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Bridge</span>, klik tab <span class="keyword">Ports</span></div>
+            <div class="code-line">2. Klik tombol <span class="string">+</span></div>
+            <div class="code-line">3. Pilih interface utama (misal: <span class="string">"wlan1"</span>) dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">4. Pilih bridge dari dropdown <span class="keyword">Bridge</span></div>
+            <div class="code-line">5. Klik <span class="string">OK</span></div>
+            <div class="code-line">6. Ulangi untuk menambahkan interface virtual-AP ke bridge</div>
         </div>
         
         <h3 class="subsection-title">Troubleshooting Koneksi Wireless</h3>
-        <p>Dari sumber MikroTik Troubleshooting Guide (2024), masalah koneksi wireless sering disebabkan oleh ketidakcocokan parameter, interferensi, atau masalah konfigurasi security profile. Berikut adalah beberapa perintah untuk diagnosa masalah wireless:</p>
+        <p>Dari sumber MikroTik Troubleshooting Guide (2024), masalah koneksi wireless sering disebabkan oleh ketidakcocokan parameter, interferensi, atau masalah konfigurasi security profile. Berikut adalah beberapa metode diagnosa masalah wireless menggunakan WinBox:</p>
         
         <div class="code-terminal">
             <div class="code-line comment"># Melihat log wireless</div>
-            <div class="code-line"><span class="keyword">/log print</span> where topics=<span class="string">wireless</span></div>
-            <div class="code-line comment"># Melakukan scan frekuensi untuk melihat channel yang sibuk</div>
-            <div class="code-line"><span class="keyword">/interface wireless frequency-scan</span> wlan1 duration=<span class="string">10s</span></div>
-            <div class="code-line comment"># Melihat status dan signal strength dari koneksi</div>
-            <div class="code-line"><span class="keyword">/interface wireless monitor</span> wlan1 once</div>
-            <div class="code-line comment"># Memeriksa parameter pada kedua perangkat (AP dan station)</div>
-            <div class="code-line"><span class="keyword">/interface wireless print</span> detail</div>
-            <div class="code-line comment"># Melihat klien yang terdaftar pada AP</div>
-            <div class="code-line"><span class="keyword">/interface wireless registration-table print</span></div>
+            <div class="code-line">1. Buka menu <span class="keyword">Log</span></div>
+            <div class="code-line">2. Gunakan filter untuk menampilkan hanya log wireless</div>
+            
+            <div class="code-line comment"># Melakukan scan frekuensi</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Klik tombol <span class="keyword">Frequency Usage</span> atau <span class="keyword">Scanner</span></div>
+            <div class="code-line">3. Pilih interface dari dropdown <span class="keyword">Interface</span></div>
+            <div class="code-line">4. Klik <span class="string">Start</span></div>
+            <div class="code-line">5. Analisis channel yang paling sedikit digunakan</div>
+            
+            <div class="code-line comment"># Memeriksa status dan signal strength</div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Status</span></div>
+            <div class="code-line">3. Periksa status koneksi dan kekuatan sinyal</div>
+            
+            <div class="code-line comment"># Memeriksa parameter detail</div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Periksa setiap tab untuk memastikan semua pengaturan sudah benar</div>
+            
+            <div class="code-line comment"># Melihat klien terdaftar pada AP</div>
+            <div class="code-line">1. Buka menu <span class="keyword">Wireless</span></div>
+            <div class="code-line">2. Klik tab <span class="keyword">Registration Table</span></div>
         </div>
         
         <p>Dari sumber Network Troubleshooting Best Practices (2023), beberapa langkah pemecahan masalah yang efektif meliputi:</p>
         
         <div class="code-terminal">
             <div class="code-line comment"># Reset konfigurasi wireless jika diperlukan</div>
-            <div class="code-line"><span class="keyword">/interface wireless reset-configuration</span> wlan1</div>
+            <div class="code-line">1. Klik kanan pada interface wireless</div>
+            <div class="code-line">2. Pilih <span class="keyword">Reset Configuration</span></div>
+            
             <div class="code-line comment"># Mengubah channel untuk menghindari interferensi</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 frequency=<span class="string">auto</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Channel</span></div>
+            <div class="code-line">3. Ubah frequency ke channel yang kurang ramai atau pilih <span class="string">"auto"</span></div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Memeriksa power output</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 tx-power=<span class="string">20</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Sesuaikan <span class="keyword">Tx Power</span></div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mematikan fitur advanced yang mungkin menyebabkan masalah</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 wmm-support=<span class="string">disabled</span> country=<span class="string">no_country_set</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Nonaktifkan fitur seperti <span class="keyword">WMM Support</span></div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
         </div>
         
         <h3 class="subsection-title">Tips Optimasi Performa</h3>
-        <p>Beberapa tips untuk mengoptimalkan performa koneksi wireless:</p>
+        <p>Beberapa tips untuk mengoptimalkan performa koneksi wireless menggunakan WinBox:</p>
         
         <div class="code-terminal">
             <div class="code-line comment"># Mengatur antenna-gain jika menggunakan antena eksternal</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 antenna-gain=<span class="string">12</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Sesuaikan <span class="keyword">Antenna Gain</span> dengan gain antena yang digunakan</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mengoptimalkan penggunaan chain</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 chains=<span class="string">0,1</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Sesuaikan <span class="keyword">Chains</span> untuk memilih antena yang digunakan</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mengatur DFS untuk menghindari interferensi radar (pada band 5GHz)</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 dfs-mode=<span class="string">no-radar-detect</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Advanced</span></div>
+            <div class="code-line">3. Sesuaikan <span class="keyword">DFS Mode</span></div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
+            
             <div class="code-line comment"># Mengatur country sesuai regulasi lokal</div>
-            <div class="code-line"><span class="keyword">/interface wireless set</span> wlan1 country=<span class="string">indonesia</span></div>
+            <div class="code-line">1. Klik dua kali pada interface wireless</div>
+            <div class="code-line">2. Klik tab <span class="keyword">Wireless</span></div>
+            <div class="code-line">3. Pilih <span class="keyword">Country</span> yang sesuai</div>
+            <div class="code-line">4. Klik <span class="string">OK</span></div>
         </div>
         
         <div class="tech-alert">
-            <p>Penggunaan parameter <code>tx-power</code> yang terlalu tinggi tidak selalu menghasilkan koneksi yang lebih baik. Hal ini dapat menyebabkan interferensi dan penurunan throughput. Sesuaikan parameter ini berdasarkan jarak dan kondisi lingkungan.</p>
+            <p>Penggunaan parameter <code>Tx Power</code> yang terlalu tinggi tidak selalu menghasilkan koneksi yang lebih baik. Hal ini dapat menyebabkan interferensi dan penurunan throughput. Sesuaikan parameter ini berdasarkan jarak dan kondisi lingkungan.</p>
         </div>
         
         <div class="conclusion-box">
-            <strong>Kesimpulan Konfigurasi Lanjutan dan Troubleshooting:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa MikroTik menyediakan kemampuan untuk mengkonfigurasi perangkat sebagai AP dan Station secara bersamaan melalui interface virtual, yang sangat berguna untuk implementasi wireless repeater. Untuk troubleshooting, RouterOS menyediakan berbagai alat diagnosa seperti frequency-scan, monitor, dan log yang dapat membantu mengidentifikasi dan menyelesaikan masalah koneksi wireless. Optimasi performa dapat dilakukan dengan penyesuaian parameter seperti channel, tx-power, antenna-gain, dan pengaturan lainnya sesuai dengan kondisi lingkungan.
+            <strong>Kesimpulan Konfigurasi Lanjutan dan Troubleshooting:</strong> Dari 2 pendapat tersebut dapat disimpulkan bahwa MikroTik menyediakan kemampuan untuk mengkonfigurasi perangkat sebagai AP dan Station secara bersamaan melalui interface virtual, yang sangat berguna untuk implementasi wireless repeater. Untuk troubleshooting, WinBox menyediakan berbagai alat diagnosa seperti frequency usage scan, status monitor, dan log yang dapat membantu mengidentifikasi dan menyelesaikan masalah koneksi wireless. Optimasi performa dapat dilakukan dengan penyesuaian parameter seperti channel, tx-power, antenna-gain, dan pengaturan lainnya sesuai dengan kondisi lingkungan.
         </div>
     </div>
 
@@ -1106,8 +1257,6 @@ user-drag: none;
         </ul>
     </div>
 </div>
-
-
 <script>
     // Tech particles animation
     function createTechParticles() {
@@ -1306,5 +1455,6 @@ user-drag: none;
 </body>
 
 </html>
+
 
 
